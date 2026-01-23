@@ -88,14 +88,14 @@ app.get("/users/:id", (req, res) => {
 });
 
 const addUser = (user) => {
-  user.id = Math.floor(Math.random() * 10000000000000000000000)
+  user.id = Math.floor(Math.random() * 1000)
   users["users_list"].push(user);
   return user;
 };
 
 app.post("/users", (req, res) => {
   const userToAdd = req.body;
-  newUser = addUser(userToAdd);
+  let newUser = addUser(userToAdd);
   res.status(201).send({newUser} );
 });
 

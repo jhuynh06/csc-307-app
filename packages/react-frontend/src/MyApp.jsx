@@ -25,14 +25,14 @@ function MyApp() {
     function updateList(person) {
     postUser(person)
         .then((res) => {if (res.status === 201) return res.json()})
-        .then((newUser) => {setCharacters([...characters, newUser])})
+        .then((json) => {setCharacters([...characters, json.newUser])})
         .catch((error) => {
             console.log(error);
         });
     }
     useEffect(() => {
     fetchUsers()
-        .then((res) => res.json())
+        .then((res) => {return res.json()})
         .then((json) => setCharacters(json["users_list"]))
         .catch((error) => {
             console.log(error);
