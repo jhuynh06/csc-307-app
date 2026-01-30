@@ -50,24 +50,9 @@ app.post("/users", (req, res) => {
   .then(newUser => res.status(201).send({newUser} ));
 });
 
-const removeUser = (id) => {
-    const old_length = users["users_list"].length
-    users["users_list"] = users["users_list"].filter(user => user["id"] != id);
-    if (users["users_list"].length < old_length) {
-        return id;
-    }
-    else {
-        return undefined;
-    }
-};
-
 app.delete("/users/:id", (req,res) => {
     const id = req.params["id"];
-    let result = removeUser(id);
-    if (result === undefined) {
-        res.status(404).send("Resource not found.");
-    }
-    else {
-        res.status(204).send();
-    }
+    userServices.removeUser(id)
+    .then(_ => res.status(204).send())
+    .catch(err => res.status(404).send("Resource not found."));
 })
