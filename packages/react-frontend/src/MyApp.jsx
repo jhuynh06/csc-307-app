@@ -6,7 +6,7 @@ function MyApp() {
     const [characters, setCharacters] = useState([]);
     function removeOneCharacter(index) {
         const characterToDelete = characters[index];
-        deleteUser(characterToDelete.id)
+        deleteUser(characterToDelete._id)
         .then((res) => {
             if (res.status === 204) {
                 const updated = characters.filter((character, i) => {
@@ -33,7 +33,7 @@ function MyApp() {
     useEffect(() => {
     fetchUsers()
         .then((res) => {return res.json()})
-        .then((json) => setCharacters(json["users_list"]))
+        .then((json) => setCharacters(json))
         .catch((error) => {
             console.log(error);
         });
